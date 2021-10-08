@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
+  Alert,
   TextInput,
   TouchableOpacity,
   StyleSheet,
@@ -16,9 +17,13 @@ export const AddBlog = () => {
   const [, setBlogList] = useContext(BlogListContext);
 
   const addNewBlog = newTitle => {
-    setBlogList(prevList => {
-      return [...prevList, {id: uuid.v4(), title: newTitle}];
-    });
+    if (newTitle.length > 0) {
+      setBlogList(prevList => {
+        return [...prevList, {id: uuid.v4(), title: newTitle}];
+      });
+    } else {
+      Alert.alert('Blog title empty', 'Please add title for new blog');
+    }
   };
 
   return (
